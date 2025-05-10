@@ -1,0 +1,20 @@
+name: macos_tabbar
+description: A Flutter package that provides a macOS-style tab bar widget.
+version: 0.0.1
+homepage: https://github.com/lasheendev/macos_tabbar
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+  flutter: ">=3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
+
+flutter:
+  uses-material-design: true
