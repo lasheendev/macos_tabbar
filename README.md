@@ -30,7 +30,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  late MacosTabData selectedTab;
+  late String? selectedTabId;
   late List<MacosTabData> tabs;
 
   @override
@@ -43,26 +43,53 @@ class _MyHomePageState extends State<MyHomePage> {
         title: 'Tab ${index + 1}',
       ),
     );
-    selectedTab = tabs.first;
+    selectedTabId = tabs.first.id;
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFF1E1E1E),
-      appBar: MacosTabbar(
-        tabs: tabs,
-        selectedTabId: selectedTab.id,
-        onTabSelected: (newTabId) {
+      appBar: tabs.isEmpty
+          ? null
+          : MacosTabbar(
+              tabs: tabs,
+              selectedTabId: selectedTabId,
+              onTabSelected: (newTabId) {
+                setState(() {
+                  selectedTabId = newTabId;
+                });
+              },
+              onTabDeleted: (tabId) {
+                setState(() {
+                  tabs.removeWhere((tab) => tab.id == tabId);
+                  if (tabs.isEmpty) {
+                    selectedTabId = null;
+                  } else if (tabId == selectedTabId) {
+                    selectedTabId = tabs.first.id;
+                  }
+                });
+              },
+            ),
+      body: Center(
+        child: Text(
+          'Selected Tab: ${selectedTabId == null ? 'No tabs' : tabs.firstWhere((tab) => tab.id == selectedTabId).title}',
+          style: const TextStyle(color: Colors.white),
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
           setState(() {
-            selectedTab = tabs.firstWhere((tab) => tab.id == newTabId);
+            final newIndex = tabs.length;
+            final newTab = MacosTabData(
+              id: Random().nextInt(1000000).toString(),
+              title: 'Tab ${newIndex + 1}',
+            );
+            tabs.add(newTab);
+            selectedTabId = newTab.id;
           });
         },
-        onTabDeleted: (tabId) {
-          setState(() {
-            tabs.removeWhere((tab) => tab.id == tabId);
-          });
-        },
+        child: const Icon(Icons.add),
       ),
     );
   }
