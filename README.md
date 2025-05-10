@@ -2,6 +2,11 @@
 
 A Flutter package that provides a macOS-style tab bar widget.
 
+<img width="880" alt="Screenshot 2025-05-10 at 6 54 50 PM" src="https://github.com/user-attachments/assets/c265af46-a2ae-4dd3-af14-4a688fa92bbd" />
+
+
+https://github.com/user-attachments/assets/4944ba45-3b7b-4d41-99f9-60206a3d87e9
+
 ## Installation
 
 Add this to your package's `pubspec.yaml` file:
