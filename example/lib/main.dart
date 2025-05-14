@@ -42,6 +42,11 @@ class _MyHomePageState extends State<MyHomePage> {
       (index) => MacosTabData(
         id: 'tab_$index',
         title: 'Tab ${index + 1}',
+        favicon: Image.network(
+          'https://www.google.com/s2/favicons?domain=google.com',
+          width: 16,
+          height: 16,
+        ),
       ),
     );
     selectedTabId = tabs.first.id;
@@ -85,6 +90,11 @@ class _MyHomePageState extends State<MyHomePage> {
             final newTab = MacosTabData(
               id: Random().nextInt(1000000).toString(),
               title: 'Tab ${newIndex + 1}',
+              favicon: Image.network(
+                'https://www.google.com/s2/favicons?domain=google.com',
+                width: 16,
+                height: 16,
+              ),
             );
             tabs.add(newTab);
             selectedTabId = newTab.id;
